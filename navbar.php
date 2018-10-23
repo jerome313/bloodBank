@@ -6,19 +6,22 @@
   </button>
   <div class="collapse navbar-collapse" id="navbar1">
     <ul class="navbar-nav ml-auto"> 
-<li class="nav-item active">
-<a class="nav-link" href="http://bootstrap-ecommerce.com">Home <span class="sr-only">(current)</span></a>
-</li>
-<li class="nav-item"><a class="nav-link" href="html-components.html"> Documentation </a></li>
-<li class="nav-item dropdown">
-	<a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown">  Dropdown  </a>
-    <ul class="dropdown-menu">
-	  <li><a class="dropdown-item" href="#"> Menu item 1</a></li>
-	  <li><a class="dropdown-item" href="#"> Menu item 2 </a></li>
-    </ul>
-</li>
 <?php
 session_start();
+if(isset($_SESSION["hospitalLoggedin"]) && $_SESSION["hospitalLoggedin"] == true){
+  echo '<li class="nav-item">
+  <a class="nav-link" href="welcome.php">
+   Home </a></li>';
+
+  echo '<li class="nav-item">
+  <a class="nav-link" href="hospitalDashboard.php">
+   Dashboard </a></li>';
+
+  echo '<li class="nav-item">
+       <a class="nav-link" href="requestersList.php">
+        Blood Requests </a></li>';
+}
+
 if(!isset($_SESSION["receiverLoggedin"]) && $_SESSION["receiverLoggedin"] !== true
    && 
    !isset($_SESSION["hospitalLoggedin"]) && $_SESSION["hospitalLoggedin"] !== true
