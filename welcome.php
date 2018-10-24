@@ -12,13 +12,21 @@ if(isset($_SESSION["receiverLoggedin"]) && $_SESSION["receiverLoggedin"] == true
 if($_POST['bloodGroup'] && $_POST['hospId']){
    $bg =$_POST['bloodGroup'];
    $hid =  $_POST['hospId'];
+    echo  $hid, $rId;
+   $reqSql = "SELECT * FROM blood_requests WHERE hospital = '$hid' AND receiver ='$rId' AND granted = 1";
 
-   $iSql = "INSERT INTO blood_requests 
+   $reqResult = $mysqli->query($reqSql);
+    $reqCount = $reqResult->num_rows;         
+     
+    if(!$reqCount){
+     $iSql = "INSERT INTO blood_requests 
             (hospital, receiver, blood_group) 
             values ('$hid','$rId','$bg') ";
-    $bool = $mysqli->query($iSql);
-    header("location: welcome.php");
-        
+     $bool = $mysqli->query($iSql);
+    }else{
+    $brSql = "UPDATE blood_requests SET granted = 0 WHERE receiver = '$rId' AND hospital = '$hid'";
+    $mysqli->query($brSql);
+    }   
 }
 
 ?>
@@ -89,7 +97,7 @@ foreach($rResult as $r){
      
         $hosp_id = $cRow['hospital'];        
         $requestedSql = "SELECT * from blood_requests 
-                         WHERE receiver = '$rId' AND hospital ='$hosp_id' ";
+                         WHERE receiver = '$rId' AND hospital ='$hosp_id' AND granted = 1";
 
          $requested_result=$mysqli->query($requestedSql);
          $requested_count = $requested_result->num_rows;
@@ -97,7 +105,7 @@ foreach($rResult as $r){
          if($rId){ 
             $bloodGroup =  $cRow['blood_group'];
 
-         if($receiverBlood == $cRow['blood_group'] && $requested_count==NULL){  
+         if($receiverBlood == $cRow['blood_group'] && $requested_count!=NULL){  
            echo  '<td>
                    <button onclick="myAjax(';echo "'",$bloodGroup,"'",","; echo "'",$hosp_id,"'"; echo ')" class="btn btn-primary mb-2">Request Sample</button>
                   </td>
