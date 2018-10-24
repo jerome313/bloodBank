@@ -34,14 +34,14 @@ if(isset($_POST['bloodGroup']) && isset($_POST['recId'])){
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style type="text/css">
-        body{ font: 14px sans-serif; text-align: center; }
+        body{ font: 14px sans-serif; text-align: center; background-color:#f2f2f2 }
     </style>
 </head>
 <body>
 <?php
 include 'navbar.php';
 ?>
-<div class="container">
+<div class="container mt-5">
 <table class="table">
   <thead>
     <tr>

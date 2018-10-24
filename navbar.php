@@ -28,12 +28,12 @@ if(!isset($_SESSION["receiverLoggedin"]) && $_SESSION["receiverLoggedin"] !== tr
 ){
 echo        
 '
-<p>Login as</p> 
+
 <li class="nav-item">
-<a class="btn ml-2 btn-warning" href="receiverLogin.php">Receiver</a></li>
-<p>or as</p>
+<a class="btn btn-sm mr-3 btn-warning" href="receiverLogin.php">Login as Receiver</a></li>
+
 <li class="nav-item">
-<a class="btn ml-2 btn-warning" href="hospitalLogin.php">Hospital</a></li>
+<a class="btn btn-sm mr-3 btn-warning" href="hospitalLogin.php"> or Hospital</a></li>
 ';
 }else{
 echo

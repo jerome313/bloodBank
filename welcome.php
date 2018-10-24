@@ -42,7 +42,8 @@ if($_POST['bloodGroup'] && $_POST['hospId']){
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style type="text/css">
-        body{ font: 14px sans-serif; text-align: center; }
+        body{ font: 14px sans-serif; text-align: center; background-color:#f2f2f2}
+        .wrapper{ margin-top:25px }
     </style>
 </head>
 <body>
@@ -75,8 +76,8 @@ foreach($rResult as $r){
 { 
 
   $hospital_id = $pRow['hospital_id'];
-  echo  '<div class="container">', 
-        $pRow['hospital_name'],
+  echo  '<div class="container wrapper">', 
+         '<h3>Hospital Name<span class="badge badge-secondary">'.$pRow['hospital_name'].'</span></h3>,',
        '<table class="table table-striped">
          <thead>
          <tr>

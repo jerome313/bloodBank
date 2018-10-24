@@ -25,7 +25,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 if($_SERVER["REQUEST_METHOD"] == "POST"){    
     // Check if BloodGroup is empty 
       if(empty(trim($_POST["bloodgroup"]))){
-        $bloodGroup_err = "Please enter blood group.";
+        $bloodGroup_err = "Please enter blood group";
     } else{
         $bloodGroup = trim($_POST["bloodgroup"]);
     }
@@ -34,7 +34,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 if($_SERVER["REQUEST_METHOD"] == "POST"){    
     // Check if quantity is empty
       if(empty(trim($_POST["quantity"]))){
-        $quantity_err = "Please enter quantity.";
+        $quantity_err = "Please enter quantity";
     } else{
         $quantity = trim($_POST["quantity"]);
     }
@@ -53,10 +53,11 @@ if(empty($bloodGroup_err) && empty($quantity_err)){
           mysqli_close($link);     
       }
     } else{
-            echo "Oops! Something went wrong. Please try again later.";
-        }  
-    mysqli_close($link);
-    }      
+        mysqli_close($link);     
+     }
+    }  
+    
+          
 ?>
 
 <!DOCTYPE html>
@@ -70,20 +71,27 @@ if(empty($bloodGroup_err) && empty($quantity_err)){
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <style type="text/css">
-        body{ font: 14px sans-serif; text-align: center; }
+        body{ font: 14px sans-serif; text-align: center; background-color:#f2f2f2 }
+        .margin{margin-top:25px}
     </style>
 </head>
 <body>
 <?php
 include 'navbar.php'; 
+if($quantity_err){
+    echo '<div class="alert alert-danger" role="alert">
+          '.$quantity_err.'!
+          </div>';
+      }     
+    if($bloodGroup_err){
+     echo '<div class="alert alert-danger" role="alert">
+          '.$bloodGroup_err.'!
+          </div>';
+    } 
 ?>
    <div class="container"> 
-   <form class="form-inline" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-    <div class="form-group mb-2">
-    <?php echo (!empty($bloodGroup_err)) ?
-        $bloodGroup_err : ''; ?>
-    <?php echo (!empty($quantity_err)) ?
-        $quantity_err : ''; ?>    
+   <form class="form-inline margin" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+    <div class="form-group mb-2">  
         <div class="input-group mb-3 form-group">
           <div class="input-group-prepend">
              <label class="input-group-text" for="inputGroupSelect01">Blood Group</label>
